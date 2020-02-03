@@ -1,0 +1,209 @@
+:host {
+    perspective: 1000px;
+}
+
+.piano {
+    margin: -200px auto 100px;
+    height: 500px;
+    display: flex;
+    flex-direction: row;
+    transform-origin: bottom;
+    transform-style: preserve-3d;
+    transform: rotateX(50deg);
+
+    &::before,
+    &::after {
+        content: '';
+        position: absolute;
+        background: darken(#444, 3%);
+        background-clip: content-box;
+        top: 0;
+        left: 6px;
+        right: 6px;
+        bottom: 0;
+        transform: translateZ(-76px);
+        box-shadow: 0 0 40px fade(#444, 40%), 0 0 0 100px white;
+    }
+
+    &::after {
+        left: 25px;
+        right: 25px;
+        bottom: auto;
+        height: 79px;
+        transform-origin: top;
+        transform: rotateX(-90deg);
+    }
+
+    .key-1,
+    .key-3,
+    .key-5,
+    .key-6,
+    .key-8,
+    .key-10,
+    .key-12 {
+        position: relative;
+        width: 76px;
+        height: 500px;
+        padding: 0;
+        border: none;
+        border-top: 252px solid transparent;
+        box-sizing: border-box;
+        background-color: #edefee;
+        background-clip: content-box;
+        margin: 0 2px;
+        outline: none;
+        transform-origin: top;
+        transform-style: preserve-3d;
+        box-shadow: inset 2px 0 2px -1px fade(white, 80%),
+            inset -2px 0 2px -1px fade(white, 80%),
+            inset 10px -10px 10px -10px fade(#444, 30%),
+            inset -10px 0 10px -10px fade(#444, 30%),
+            inset 0 -200px 200px -200px fade(white, 70%),
+            inset 0 0 0 1000px fade(#edefee, 50%);
+        transition: background-color 0.3s ease, transform 0.3s ease;
+
+        &:active {
+            transform: rotateX(-7deg);
+        }
+
+        &:hover {
+            background-color: white;
+
+            &::before {
+                background: white;
+            }
+        }
+
+        &::before,
+        &::after {
+            content: '';
+            background: #edefee;
+            position: absolute;
+            height: 252px;
+            top: -250px;
+            left: 0;
+            box-shadow: inset 0 200px 200px -200px fade(#444, 30%),
+                inset 10px 10px 10px -10px fade(#444, 30%),
+                inset -10px 0 10px -10px fade(#444, 30%),
+                inset 0 0 0 1000px fade(#edefee, 50%);
+            transition: background 0.3s ease;
+        }
+
+        &::after {
+            top: 100%;
+            width: 100%;
+            height: 76px;
+            transform-origin: top;
+            transform: rotateX(-90deg);
+            box-shadow: inset 0 -30px 50px -30px fade(black, 30%), inset 0 2px 1px white,
+                inset 0 4px fade(black, 10%), inset 0 10px 10px -10px fade(black, 40%);
+        }
+    }
+
+    .key-1::before,
+    .key-6::before {
+        right: 26px;
+    }
+
+    .key-3::before {
+        left: 14px;
+        right: 14px;
+    }
+
+    .key-5::before,
+    .key-12::before {
+        left: 26px;
+        right: 0;
+    }
+
+    .key-8::before {
+        left: 14px;
+        right: 20px;
+    }
+
+    .key-10::before {
+        left: 20px;
+        right: 14px;
+    }
+
+    .key-2,
+    .key-4,
+    .key-7,
+    .key-9,
+    .key-11 {
+        position: relative;
+        color: #444;
+        width: 32px;
+        height: 250px;
+        border: none;
+        padding: 0;
+        outline: none;
+        background: lighten(#444, 10%);
+        border-top-left-radius: 6px;
+        border-top-right-radius: 6px;
+        transform: translateZ(35px);
+        transform-style: preserve-3d;
+        transform-origin: top;
+        box-shadow: inset 0 -7px 5px, inset 4px 0 5px, inset -4px 0 5px,
+            inset 0 0 0 1000px fade(lighten(#444, 10%), 50%);
+        z-index: 1;
+        transition: background 0.3s ease, transform 0.3s ease;
+
+        &:active {
+            transform: rotateX(-5deg) translateZ(35px);
+        }
+
+        &:hover {
+            background: darken(white, 50%);
+        }
+
+        &::before {
+            content: '';
+            position: absolute;
+            background: #444;
+            border-top-left-radius: 6px;
+            top: 0;
+            height: 100%;
+            width: 39px;
+            transform-origin: left;
+            left: 1px;
+            transform: rotateY(93deg);
+            box-shadow: inset -50px 0 50px -50px black;
+        }
+
+        &::after {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: -2px;
+            width: 100%;
+            border-bottom: 31px solid darken(#444, 2%);
+            border-left: 2px solid transparent;
+            border-right: 2px solid transparent;
+            height: 0;
+            transform-origin: top;
+            transform: rotateX(-90deg);
+            box-shadow: 0 7px 20px fade(black, 25%), 0 3px 5px -2px fade(white, 80%),
+                0 5px, 0 20px darken(#444, 2%), 0 40px darken(#444, 2%);
+        }
+
+        &:nth-child(-n + 7)::before {
+            left: 99%;
+            transform: rotateY(87deg);
+        }
+    }
+
+    .key-2,
+    .key-7 {
+        margin: 0 -10px 0 -22px;
+    }
+
+    .key-4,
+    .key-11 {
+        margin: 0 -22px 0 -10px;
+    }
+
+    .key-9 {
+        margin: 0 -16px 0 -16px;
+    }
+}

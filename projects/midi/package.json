@@ -1,0 +1,20 @@
+{
+    "name": "@ng-web-apis/midi",
+    "version": "1.0.0",
+    "peerDependencies": {
+        "@angular/common": ">=6.0.0",
+        "@angular/core": ">=6.0.0",
+        "@ng-web-apis/common": ">=1.0.0"
+    },
+    "description": "An Observable based library for the use of Web MIDI API with Angular",
+    "keywords": ["angular", "ng", "midi", "audio", "music", "synth", "keyboard"],
+    "license": "MIT",
+    "author": {
+        "name": "Alexander Inkin",
+        "email": "alexander@inkin.ru"
+    },
+    "contributors": ["Roman Sedov <79601794011@ya.ru>"],
+    "repository": "https://github.com/ng-web-apis/midi",
+    "bugs": "https://github.com/ng-web-apis/midi/issues",
+    "homepage": "https://github.com/ng-web-apis/midi#README"
+}
