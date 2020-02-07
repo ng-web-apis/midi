@@ -1,16 +1,20 @@
-<section class="piano" id="piano">
-    <button type="button" tabindex="-1" class="key-12" title="B"></button>
-    <button type="button" tabindex="-1" class="key-1" title="C"></button>
-    <button type="button" tabindex="-1" class="key-2" title="C#/Db"></button>
-    <button type="button" tabindex="-1" class="key-3" title="D"></button>
-    <button type="button" tabindex="-1" class="key-4" title="D#/Eb"></button>
-    <button type="button" tabindex="-1" class="key-5" title="E"></button>
-    <button type="button" tabindex="-1" class="key-6" title="F"></button>
-    <button type="button" tabindex="-1" class="key-7" title="F#/Gb"></button>
-    <button type="button" tabindex="-1" class="key-8" title="G"></button>
-    <button type="button" tabindex="-1" class="key-9" title="G#/Ab"></button>
-    <button type="button" tabindex="-1" class="key-10" title="A"></button>
-    <button type="button" tabindex="-1" class="key-11" title="A#/Bb"></button>
-    <button type="button" tabindex="-1" class="key-12" title="B"></button>
-    <button type="button" tabindex="-1" class="key-1" title="C"></button>
+<section *ngIf="notes$ | async as notes" class="piano">
+    <ng-container
+        *ngFor="let note of notes | keyvalue; trackBy: noteKey"
+        waOscillatorNode
+        type="sawtooth"
+        autoplay
+        [frequency]="toFrequency(note.key) | waAudioParam: 0.2"
+    >
+        <ng-container waGainNode gain="0" [gain]="note.value | waAudioParam: 0.01">
+            <ng-container waAudioDestinationNode></ng-container>
+        </ng-container>
+    </ng-container>
+
+    <div
+        *ngFor="let key of octaves"
+        [class]="getClass(notes, key)"
+        (mousedown)="onMouseDown(key)"
+        (touchstart)="onMouseDown(key)"
+    ></div>
 </section>
