@@ -1,25 +1,35 @@
 import {TestBed} from '@angular/core/testing';
+import {NAVIGATOR} from '@ng-web-apis/common';
 import {MIDI_ACCESS} from '../midi-access';
 import {SYSEX} from '../sysex';
 
 describe('MIDI_ACCESS', () => {
-    // TODO: Wait before remote debugging allows midi access
-    beforeAll(done => {
-        setTimeout(() => {
-            done();
-        }, 4000);
-    });
+    const navigatorMock = jasmine.createSpyObj(['requestMIDIAccess']);
 
-    it('SYSEX is false by default', done => {
-        TestBed.get(MIDI_ACCESS).then((midiAccess: any) => {
-            expect(midiAccess.sysexEnabled).toBe(false);
-            done();
+    it('SYSEX is false by default', () => {
+        TestBed.configureTestingModule({
+            providers: [
+                {
+                    provide: NAVIGATOR,
+                    useValue: navigatorMock,
+                },
+            ],
+        });
+
+        TestBed.get(MIDI_ACCESS);
+
+        expect(navigatorMock.requestMIDIAccess.calls.mostRecent().args[0]).toEqual({
+            sysex: false,
         });
     });
 
-    it('SYSEX is set to true', done => {
+    it('SYSEX is set to true', () => {
         TestBed.configureTestingModule({
             providers: [
+                {
+                    provide: NAVIGATOR,
+                    useValue: navigatorMock,
+                },
                 {
                     provide: SYSEX,
                     useValue: true,
@@ -27,9 +37,10 @@ describe('MIDI_ACCESS', () => {
             ],
         });
 
-        TestBed.get(MIDI_ACCESS).then((midiAccess: any) => {
-            expect(midiAccess.sysexEnabled).toBe(true);
-            done();
+        TestBed.get(MIDI_ACCESS);
+
+        expect(navigatorMock.requestMIDIAccess.calls.mostRecent().args[0]).toEqual({
+            sysex: true,
         });
     });
 });

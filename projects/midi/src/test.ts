@@ -10,25 +10,6 @@ import {
 
 declare const require: any;
 
-fetch('http://localhost:9222/json')
-    .then(response => response.json())
-    .then(response => {
-        const socket = new WebSocket(response[0].webSocketDebuggerUrl);
-
-        socket.onopen = () => {
-            socket.send(
-                JSON.stringify({
-                    id: 1,
-                    method: 'Browser.grantPermissions',
-                    params: {
-                        origin: 'http://localhost:9876',
-                        permissions: ['midi', 'midiSysex'],
-                    },
-                }),
-            );
-        };
-    });
-
 // First, initialize the Angular testing environment.
 getTestBed().initTestEnvironment(
     BrowserDynamicTestingModule,
