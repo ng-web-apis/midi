@@ -1,20 +1,25 @@
-<section *ngIf="notes$ | async as notes" class="piano">
-    <ng-container
-        *ngFor="let note of notes | keyvalue; trackBy: noteKey"
-        waOscillatorNode
-        type="sawtooth"
-        autoplay
-        [frequency]="toFrequency(note.key) | waAudioParam: 0.2"
-    >
-        <ng-container waGainNode gain="0" [gain]="note.value | waAudioParam: 0.01">
-            <ng-container waAudioDestinationNode></ng-container>
+<button *ngIf="!started; else piano" class="start" (click)="start()">
+    Start AudioContext
+</button>
+<ng-template #piano>
+    <section *ngIf="notes$ | async as notes" class="piano">
+        <ng-container
+            *ngFor="let note of notes | keyvalue; trackBy: noteKey"
+            waOscillatorNode
+            type="sawtooth"
+            autoplay
+            [frequency]="toFrequency(note.key) | waAudioParam: 0.2"
+        >
+            <ng-container waGainNode gain="0" [gain]="note.value | waAudioParam: 0.01">
+                <ng-container waAudioDestinationNode></ng-container>
+            </ng-container>
         </ng-container>
-    </ng-container>
 
-    <div
-        *ngFor="let key of octaves"
-        [class]="getClass(notes, key)"
-        (mousedown)="onMouseDown(key)"
-        (touchstart)="onMouseDown(key)"
-    ></div>
-</section>
+        <div
+            *ngFor="let key of octaves"
+            [class]="getClass(notes, key)"
+            (mousedown)="onMouseDown(key)"
+            (touchstart)="onMouseDown(key)"
+        ></div>
+    </section>
+</ng-template>

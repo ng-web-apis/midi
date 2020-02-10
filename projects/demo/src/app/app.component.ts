@@ -1,7 +1,7 @@
 import {ChangeDetectionStrategy, Component, HostListener, Inject} from '@angular/core';
-import {MIDI_MESSAGES, notes, toData, toFrequency} from '@ng-web-apis/midi';
-import {merge, Observable, Subject} from 'rxjs';
-import {map, scan, startWith, switchMap} from 'rxjs/operators';
+import {MIDI_MESSAGES, MIDI_SUPPORT, notes, toData, toFrequency} from '@ng-web-apis/midi';
+import {EMPTY, merge, Observable, Subject} from 'rxjs';
+import {catchError, map, scan, startWith, switchMap} from 'rxjs/operators';
 
 import MIDIMessageEvent = WebMidi.MIDIMessageEvent;
 
@@ -12,6 +12,8 @@ import MIDIMessageEvent = WebMidi.MIDIMessageEvent;
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppComponent {
+    started = false;
+
     readonly octaves = Array.from({length: 24}, (_, i) => i + 48);
 
     readonly notes$: Observable<Map<number, number>>;
@@ -20,7 +22,10 @@ export class AppComponent {
 
     readonly mouseup$ = new Subject<void>();
 
-    constructor(@Inject(MIDI_MESSAGES) messages$: Observable<MIDIMessageEvent>) {
+    constructor(
+        @Inject(MIDI_SUPPORT) readonly supported: boolean,
+        @Inject(MIDI_MESSAGES) messages$: Observable<MIDIMessageEvent>,
+    ) {
         const mouseInitiated$ = this.mousedown$.pipe(
             switchMap(down =>
                 this.mouseup$.pipe(
@@ -32,6 +37,7 @@ export class AppComponent {
 
         this.notes$ = merge(
             messages$.pipe(
+                catchError(() => EMPTY),
                 notes(),
                 toData(),
             ),
@@ -40,6 +46,10 @@ export class AppComponent {
             scan((map, [_, note, volume]) => map.set(note, volume / 512), new Map()),
             startWith(new Map()),
         );
+    }
+
+    start() {
+        this.started = true;
     }
 
     noteKey({key}: {key: number}): number {
