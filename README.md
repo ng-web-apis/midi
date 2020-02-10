@@ -121,7 +121,7 @@ have been applied.
 -   `toValueByte` — extracts third element from `data` [Uint8Array](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Uint8Array)
 
 > Keep in mind some messages might not contain third or even second byte so only use those
-> extractions when you are sure (i.e. filterd the stream to compliant message beforehand)
+> extractions when you are sure (i.e. filtered the stream to compliant messages beforehand).
 
 ## Demo
 
