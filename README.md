@@ -8,7 +8,7 @@
 [![Coveralls github](https://img.shields.io/coveralls/github/ng-web-apis/midi)](https://coveralls.io/github/ng-web-apis/midi?branch=master)
 [![angular-open-source-starter](https://img.shields.io/badge/made%20with-angular--open--source--starter-d81676?logo=angular)](https://github.com/TinkoffCreditSystems/angular-open-source-starter)
 
-This library contains abstraction and helpful utils to use [Web MIDI API](https://www.w3.org/TR/webmidi) idiomatically with Angular.
+This library contains abstractions and helpful utils to use [Web MIDI API](https://www.w3.org/TR/webmidi) idiomatically with Angular.
 
 ## Install
 
