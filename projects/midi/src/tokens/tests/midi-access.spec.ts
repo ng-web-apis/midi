@@ -43,4 +43,20 @@ describe('MIDI_ACCESS', () => {
             sysex: true,
         });
     });
+
+    it('Promise is rejected when Web MIDI API is not supported', done => {
+        TestBed.configureTestingModule({
+            providers: [
+                {
+                    provide: NAVIGATOR,
+                    useValue: {},
+                },
+            ],
+        });
+
+        TestBed.get(MIDI_ACCESS).catch((e: any) => {
+            expect(e instanceof Error).toBe(true);
+            done();
+        });
+    });
 });

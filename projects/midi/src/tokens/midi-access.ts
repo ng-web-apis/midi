@@ -12,7 +12,9 @@ export const MIDI_ACCESS = new InjectionToken<Promise<MIDIAccess>>(
             const navigatorRef = inject(NAVIGATOR);
             const sysex = inject(SYSEX);
 
-            return navigatorRef.requestMIDIAccess({sysex});
+            return navigatorRef.requestMIDIAccess
+                ? navigatorRef.requestMIDIAccess({sysex})
+                : Promise.reject(new Error('Web MIDI API is not supported'));
         },
     },
 );
