@@ -1,5 +1,5 @@
 import {inject, InjectionToken} from '@angular/core';
-import {from, fromEvent, merge, Observable} from 'rxjs';
+import {from, fromEvent, merge, Observable, throwError} from 'rxjs';
 import {FromEventTarget} from 'rxjs/internal/observable/fromEvent';
 import {switchMap} from 'rxjs/operators';
 import {MIDI_ACCESS} from './midi-access';
@@ -11,16 +11,18 @@ export const MIDI_MESSAGES = new InjectionToken<Observable<MIDIMessageEvent>>(
     {
         providedIn: 'root',
         factory: () =>
-            from(inject(MIDI_ACCESS)).pipe(
+            from(inject(MIDI_ACCESS).catch((e: Error) => e)).pipe(
                 switchMap(access =>
-                    merge(
-                        ...Array.from(access.inputs).map(([_, input]) =>
-                            fromEvent(
-                                input as FromEventTarget<MIDIMessageEvent>,
-                                'midimessage',
-                            ),
-                        ),
-                    ),
+                    access instanceof Error
+                        ? throwError(access)
+                        : merge(
+                              ...Array.from(access.inputs).map(([_, input]) =>
+                                  fromEvent(
+                                      input as FromEventTarget<MIDIMessageEvent>,
+                                      'midimessage',
+                                  ),
+                              ),
+                          ),
                 ),
             ),
     },
