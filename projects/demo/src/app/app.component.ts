@@ -18,11 +18,11 @@ export class AppComponent {
 
     readonly notes$: Observable<Map<number, number | null>>;
 
-    readonly mousedown$ = new Subject<number>();
+    private readonly mousedown$ = new Subject<number>();
 
-    readonly mouseup$ = new Subject<void>();
+    private readonly mouseup$ = new Subject<void>();
 
-    readonly silent$ = new Subject<number>();
+    private readonly silent$ = new Subject<number>();
 
     constructor(
         @Inject(MIDI_SUPPORT) readonly supported: boolean,
