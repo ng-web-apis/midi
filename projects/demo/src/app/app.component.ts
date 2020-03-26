@@ -16,11 +16,13 @@ export class AppComponent {
 
     readonly octaves = Array.from({length: 24}, (_, i) => i + 48);
 
-    readonly notes$: Observable<Map<number, number>>;
+    readonly notes$: Observable<Map<number, number | null>>;
 
     readonly mousedown$ = new Subject<number>();
 
     readonly mouseup$ = new Subject<void>();
+
+    readonly silent$ = new Subject<number>();
 
     constructor(
         @Inject(MIDI_SUPPORT) readonly supported: boolean,
@@ -44,6 +46,12 @@ export class AppComponent {
             mouseInitiated$,
         ).pipe(
             scan((map, [_, note, volume]) => map.set(note, volume / 512), new Map()),
+            switchMap(notes =>
+                this.silent$.pipe(
+                    map(key => notes.set(key, null)),
+                    startWith(notes),
+                ),
+            ),
             startWith(new Map()),
         );
     }
@@ -65,6 +73,10 @@ export class AppComponent {
         const key = note - 47;
 
         return `${className} key-${key % 12 || 12}`;
+    }
+
+    onQuiet(key: number) {
+        this.silent$.next(key);
     }
 
     onMouseDown(note: number) {

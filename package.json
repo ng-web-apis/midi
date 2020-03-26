@@ -2,15 +2,7 @@
     "name": "@ng-web-apis/midi",
     "version": "1.0.1",
     "description": "An Observable based library for the use of Web MIDI API with Angular",
-    "keywords": [
-        "angular",
-        "ng",
-        "midi",
-        "audio",
-        "music",
-        "synth",
-        "keyboard"
-    ],
+    "keywords": ["angular", "ng", "midi", "audio", "music", "synth", "keyboard"],
     "scripts": {
         "ng": "ng",
         "start": "ng serve",
@@ -42,9 +34,7 @@
         "name": "Alexander Inkin",
         "email": "alexander@inkin.ru"
     },
-    "contributors": [
-        "Roman Sedov <79601794011@ya.ru>"
-    ],
+    "contributors": ["Roman Sedov <79601794011@ya.ru>"],
     "repository": "https://github.com/ng-web-apis/midi",
     "bugs": "https://github.com/ng-web-apis/midi/issues",
     "homepage": "https://github.com/ng-web-apis/midi#README",
@@ -59,8 +49,8 @@
         "@angular/platform-browser-dynamic": "^7.2.15",
         "@angular/platform-server": "^7.2.15",
         "@angular/router": "^7.2.15",
-        "@ng-web-apis/audio": "^1.2.1",
-        "@ng-web-apis/common": "^1.0.1",
+        "@ng-web-apis/audio": "latest",
+        "@ng-web-apis/common": "latest",
         "@nguniversal/common": "^7.1.1",
         "@nguniversal/express-engine": "^7.1.1",
         "@nguniversal/module-map-ngfactory-loader": "^7.1.1",
@@ -113,10 +103,7 @@
         }
     },
     "lint-staged": {
-        "*.{js,ts,html,md,less,json}": [
-            "prettier --write",
-            "git add"
-        ],
+        "*.{js,ts,html,md,less,json}": ["prettier --write", "git add"],
         "*.ts": "tslint"
     },
     "standard-version": {

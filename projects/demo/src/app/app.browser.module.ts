@@ -8,6 +8,7 @@ import {NgModule} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {BrowserModule} from '@angular/platform-browser';
 import {WebAudioModule} from '@ng-web-apis/audio';
+import {AdsrPipe} from './adsr.pipe';
 import {AppComponent} from './app.component';
 import {AppRoutingModule} from './app.routes';
 
@@ -20,7 +21,7 @@ import {AppRoutingModule} from './app.routes';
         AppRoutingModule,
         WebAudioModule,
     ],
-    declarations: [AppComponent],
+    declarations: [AppComponent, AdsrPipe],
     providers: [
         {
             provide: LocationStrategy,

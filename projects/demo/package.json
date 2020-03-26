@@ -15,6 +15,7 @@
         "@angular/platform-browser": "^8.2.4",
         "@angular/platform-browser-dynamic": "8.2.0",
         "@angular/router": "8.2.0",
+        "@ng-web-apis/audio": "latest",
         "@ng-web-apis/midi": "latest",
         "@ng-web-apis/common": "latest",
         "core-js": "2.6.9",
