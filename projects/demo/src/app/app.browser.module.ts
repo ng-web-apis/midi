@@ -7,21 +7,15 @@ import {
 import {NgModule} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {BrowserModule} from '@angular/platform-browser';
-import {WebAudioModule} from '@ng-web-apis/audio';
+import {WebAudioModule} from '@ng-web-apis/audio/fesm2015/ng-web-apis-audio';
 import {AdsrPipe} from './adsr.pipe';
 import {AppComponent} from './app.component';
-import {AppRoutingModule} from './app.routes';
+import {DemoComponent} from './demo/demo.component';
 
 @NgModule({
     bootstrap: [AppComponent],
-    imports: [
-        CommonModule,
-        FormsModule,
-        BrowserModule.withServerTransition({appId: 'demo'}),
-        AppRoutingModule,
-        WebAudioModule,
-    ],
-    declarations: [AppComponent, AdsrPipe],
+    imports: [CommonModule, FormsModule, BrowserModule, WebAudioModule],
+    declarations: [AppComponent, DemoComponent, AdsrPipe],
     providers: [
         {
             provide: LocationStrategy,
