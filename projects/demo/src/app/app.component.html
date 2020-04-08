@@ -1,9 +1,9 @@
 <p *ngIf="!supported">
     Web MIDI API is not supported by your browser
 </p>
-<button *ngIf="!started; else piano" class="start" (click)="start()">
-    Start AudioContext
-</button>
-<ng-template #piano>
-    <demo></demo>
+<demo *ngIf="started; else button"></demo>
+<ng-template #button>
+    <button class="start" (click)="start()">
+        Start AudioContext
+    </button>
 </ng-template>

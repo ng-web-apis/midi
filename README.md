@@ -125,7 +125,7 @@ have been applied.
 
 ## Demo
 
-You can [try online demo here](https://ng-web-apis.github.io/midi)
+You can [try online demo here](https://stackblitz.com/github/ng-web-apis/midi/tree/master/projects/demo)
 
 ## See also
 
