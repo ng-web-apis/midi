@@ -1,0 +1,48 @@
+<ng-container *ngIf="notes$ | async as notes">
+    <ng-container *ngFor="let note of notes | keyvalue; trackBy: noteKey">
+        <ng-container *ngIf="note.value !== null">
+            <ng-container
+                waOscillatorNode
+                detune="5"
+                autoplay
+                [frequency]="toFrequency(note.key)"
+            >
+                <ng-container
+                    waGainNode
+                    gain="0"
+                    [gain]="note.value | adsr: 0:0.1:0.02:1"
+                >
+                    <ng-container waAudioDestinationNode></ng-container>
+                </ng-container>
+            </ng-container>
+            <ng-container
+                waOscillatorNode
+                type="sawtooth"
+                autoplay
+                [frequency]="toFrequency(note.key)"
+            >
+                <ng-container
+                    waGainNode
+                    gain="0"
+                    [gain]="note.value | adsr: 0:0.1:0.02:1"
+                >
+                    <ng-container
+                        waAudioDestinationNode
+                        (quiet)="onQuiet(note.key)"
+                    ></ng-container>
+                    <ng-container [waOutput]="convolver"></ng-container>
+                </ng-container>
+            </ng-container>
+        </ng-container>
+    </ng-container>
+    <ng-container #convolver="AudioNode" waConvolverNode [buffer]="response | async">
+        <ng-container waAudioDestinationNode></ng-container>
+    </ng-container>
+
+    <div
+        *ngFor="let key of octaves"
+        [class]="getClass(notes, key)"
+        (mousedown)="onMouseDown(key)"
+        (touchstart)="onMouseDown(key)"
+    ></div
+></ng-container>
