@@ -23,6 +23,10 @@ export * from './operators/to-status-byte';
 export * from './operators/to-time-stamp';
 export * from './operators/to-value-byte';
 
+/* Pipes */
+export * from './pipes/frequency/frequency.module';
+export * from './pipes/frequency/frequency.pipe';
+
 /* Tokens */
 export * from './tokens/midi-access';
 export * from './tokens/midi-input';
