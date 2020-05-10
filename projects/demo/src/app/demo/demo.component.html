@@ -5,12 +5,12 @@
                 waOscillatorNode
                 detune="5"
                 autoplay
-                [frequency]="toFrequency(note.key)"
+                [frequency]="note.key | frequency"
             >
                 <ng-container
                     waGainNode
                     gain="0"
-                    [gain]="note.value | adsr: 0:0.1:0.02:1"
+                    [gain]="note.value | adsr: 0:0.1:note.value * 0.8:1"
                 >
                     <ng-container waAudioDestinationNode></ng-container>
                 </ng-container>
@@ -19,12 +19,12 @@
                 waOscillatorNode
                 type="sawtooth"
                 autoplay
-                [frequency]="toFrequency(note.key)"
+                [frequency]="note.key | frequency"
             >
                 <ng-container
                     waGainNode
                     gain="0"
-                    [gain]="note.value | adsr: 0:0.1:0.02:1"
+                    [gain]="note.value | adsr: 0:0.1:note.value * 0.8:1"
                 >
                     <ng-container
                         waAudioDestinationNode

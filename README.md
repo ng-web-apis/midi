@@ -71,6 +71,8 @@ export class MyComponent {
 
 -   You can convert MIDI note to frequency and back using `toFrequency` and `toNote` functions.
     They optionally accept second argument for tuning of middle A note using 440 as default value
+-   You can use `frequency` pipe from `FrequencyPipeModule` to convert MIDI note to frequency
+    directly in template
 
 ### RxJs operators
 

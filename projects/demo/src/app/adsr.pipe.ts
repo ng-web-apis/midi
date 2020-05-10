@@ -30,17 +30,10 @@ export class AdsrPipe implements PipeTransform {
                       mode: 'linear',
                   },
               ]
-            : [
-                  {
-                      value: sustain,
-                      duration: 0,
-                      mode: 'instant',
-                  },
-                  {
-                      value: 0,
-                      duration: release,
-                      mode: 'linear',
-                  },
-              ];
+            : {
+                  value: 0,
+                  duration: release,
+                  mode: 'linear',
+              };
     }
 }

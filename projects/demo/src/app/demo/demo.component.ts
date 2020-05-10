@@ -1,5 +1,5 @@
 import {ChangeDetectionStrategy, Component, HostListener, Inject} from '@angular/core';
-import {MIDI_MESSAGES, notes, toData, toFrequency} from '@ng-web-apis/midi';
+import {MIDI_MESSAGES, notes, toData} from '@ng-web-apis/midi';
 import {EMPTY, merge, Observable, Subject} from 'rxjs';
 import {catchError, map, scan, startWith, switchMap, take} from 'rxjs/operators';
 
@@ -58,10 +58,6 @@ export class DemoComponent {
 
     noteKey({key}: {key: number}): number {
         return key;
-    }
-
-    toFrequency(note: number): number {
-        return toFrequency(note);
     }
 
     getClass(notes: Map<number, number>, note: number): string {
