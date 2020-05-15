@@ -30,8 +30,10 @@ export * from './pipes/frequency/frequency.pipe';
 /* Tokens */
 export * from './tokens/midi-access';
 export * from './tokens/midi-input';
+export * from './tokens/midi-inputs';
 export * from './tokens/midi-messages';
 export * from './tokens/midi-output';
+export * from './tokens/midi-outputs';
 export * from './tokens/midi-support';
 export * from './tokens/sysex';
 
